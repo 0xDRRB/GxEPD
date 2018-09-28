@@ -44,7 +44,8 @@ class GxEPD : public GxFont_GFX
       bm_r270 = bm_r90 | bm_r180,
       bm_partial_update = (1 << 6),
       bm_invert_red = (1 << 7),
-      bm_transparent = (1 << 8)
+      bm_transparent = (1 << 8),
+	  bm_xbm = (1 << 9)
     };
   public:
     //GxEPD(int16_t w, int16_t h) : Adafruit_GFX(w, h) {};

@@ -161,6 +161,8 @@ void GxGDEW075Z09::drawPicture(const uint8_t* black_bitmap, const uint8_t* red_b
 #endif
       if (mode & bm_invert) black_data = ~black_data;
       if (mode & bm_invert_red) red_data = ~red_data;
+	  if (mode & bm_xbm) black_data = (( black_data * 0x0802LU & 0x22110LU) | ( black_data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
+	  if (mode & bm_xbm) red_data = ((red_data * 0x0802LU & 0x22110LU) | (red_data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
       _send8pixel(black_data, red_data);
     }
     IO.writeCommandTransaction(0x12);      //display refresh
@@ -183,6 +185,8 @@ void GxGDEW075Z09::drawPicture(const uint8_t* black_bitmap, const uint8_t* red_b
 #endif
       if (mode & bm_invert) black_data = ~black_data;
       if (mode & bm_invert_red) red_data = ~red_data;
+	  if (mode & bm_xbm) black_data = (( black_data * 0x0802LU & 0x22110LU) | ( black_data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
+	  if (mode & bm_xbm) red_data = ((red_data * 0x0802LU & 0x22110LU) | (red_data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
       _send8pixel(black_data, red_data);
     }
     IO.writeCommandTransaction(0x12);      //display refresh

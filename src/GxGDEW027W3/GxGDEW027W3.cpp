@@ -198,6 +198,7 @@ void GxGDEW027W3::drawBitmap(const uint8_t* bitmap, uint32_t size, int16_t mode)
         data = bitmap[i];
 #endif
         if (mode & bm_invert) data = ~data;
+		if (mode & bm_xbm) data = ((data * 0x0802LU & 0x22110LU) | (data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
       }
       _writeData(data);
     }
@@ -225,6 +226,7 @@ void GxGDEW027W3::drawBitmap(const uint8_t* bitmap, uint32_t size, int16_t mode)
         data = bitmap[i];
 #endif
         if (mode & bm_invert) data = ~data;
+		if (mode & bm_xbm) data = ((data * 0x0802LU & 0x22110LU) | (data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
       }
       _writeData(data);
     }

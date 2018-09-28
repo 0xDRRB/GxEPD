@@ -198,6 +198,7 @@ void GxGDEW0154Z04::drawPicture(const uint8_t* black_bitmap, const uint8_t* red_
       data = black_bitmap[i];
 #endif
       if (mode & bm_invert) data = ~data;
+	  if (mode & bm_xbm) data = ((data * 0x0802LU & 0x22110LU) | (data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
     }
     _writeData(bw2grey[(data & 0xF0) >> 4]);
     _writeData(bw2grey[data & 0x0F]);
@@ -214,6 +215,7 @@ void GxGDEW0154Z04::drawPicture(const uint8_t* black_bitmap, const uint8_t* red_
       data = red_bitmap[i];
 #endif
       if (mode & bm_invert_red) data = ~data;
+	  if (mode & bm_xbm) data = ((data * 0x0802LU & 0x22110LU) | (data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
     }
     _writeData(data);
   }
@@ -239,6 +241,7 @@ void GxGDEW0154Z04::drawBitmap(const uint8_t* bitmap, uint32_t size, int16_t mod
     uint8_t data = (i < size) ? bitmap[i] : 0x00;
 #endif
     if (mode & bm_invert) data = ~data;
+	if (mode & bm_xbm) data = ((data * 0x0802LU & 0x22110LU) | (data * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16;
     _writeData(~(bw2grey[(data & 0xF0) >> 4] & mask));
     _writeData(~(bw2grey[data & 0x0F] & mask));
   }
